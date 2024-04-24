@@ -35,7 +35,7 @@ class OutgoingTextMessageTableViewCell: UITableViewCell {
         self.setupContraints()
     }
     
-    func addElemented(){
+    func addElemented() {
         self.addSubview(self.myMessageView)
         self.myMessageView.addSubview(self.messageTextLabel)
         self.isSelected = false

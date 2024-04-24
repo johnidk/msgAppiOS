@@ -58,7 +58,7 @@ extension RegisterVC:RegisterScreenProtocol{
         
         self.auth?.createUser(withEmail: register.getEmail(), password: register.getPassword(), completion: { (result, error) in
             
-            if error != nil{
+            if error != nil {
                 self.alert?.getAlert(titulo: "Atenção", mensagem: "Erro ao cadastrar, verique os dados e tente novamente")
             }else{
                 

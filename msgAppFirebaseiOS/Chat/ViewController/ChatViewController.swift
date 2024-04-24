@@ -11,16 +11,16 @@ import AVFoundation
 
 class ChatViewController: UIViewController {
     
-    var listaMensagens:[Message] = []
-    var idUsuarioLogado:String?
-    var contato:Contact?
-    var mensagensListener:ListenerRegistration?
-    var auth:Auth?
-    var db:Firestore?
-    var nomeContato:String?
-    var nomeUsuarioLogado:String?
+    var listaMensagens: [Message] = []
+    var idUsuarioLogado: String?
+    var contato: Contact?
+    var mensagensListener: ListenerRegistration?
+    var auth: Auth?
+    var db: Firestore?
+    var nomeContato: String?
+    var nomeUsuarioLogado: String?
     
-    var screen:ChatViewScreen?
+    var screen: ChatViewScreen?
     
     override func loadView() {
         self.screen = ChatViewScreen()
@@ -41,18 +41,18 @@ class ChatViewController: UIViewController {
         self.mensagensListener?.remove()
     }
     
-    func addListenerRecuperarMensagens(){
+    func addListenerRecuperarMensagens() {
         
-        if let idDestinatario = self.contato?.id{
+        if let idDestinatario = self.contato?.id {
             
-            mensagensListener = db?.collection("mensagens").document(self.idUsuarioLogado ?? "").collection(idDestinatario).order(by: "data",descending: true).addSnapshotListener({ querySnapshot, error in
+            mensagensListener = db?.collection("mensagens").document(self.idUsuarioLogado ?? "").collection(idDestinatario).order(by: "data",descending: true).addSnapshotListener( { querySnapshot, error in
                 
                 //limpar lista
                 self.listaMensagens.removeAll()
                 
                 //Recuperar dados
-                if let snapshot = querySnapshot{
-                    for document in snapshot.documents{
+                if let snapshot = querySnapshot {
+                    for document in snapshot.documents {
                         let dados = document.data()
                         self.listaMensagens.append(Message(dicionario: dados))
                     }
@@ -60,35 +60,30 @@ class ChatViewController: UIViewController {
                 }
             })
         }
-        
-        
-        
     }
 
     
-    private func configDataFirebase(){
+    private func configDataFirebase() {
         self.auth = Auth.auth()
         self.db = Firestore.firestore()
-        
-        
+
         //Recuperar Id Usuario Logado
         if let id = self.auth?.currentUser?.uid{
             self.idUsuarioLogado = id
             self.recuperarDadosUsuarioLogado()
         }
         
-        if let nome = self.contato?.nome{
+        if let nome = self.contato?.nome {
             self.nomeContato = nome
         }
-        
         
     }
     
     
-    private func recuperarDadosUsuarioLogado(){
+    private func recuperarDadosUsuarioLogado() {
         let usuarios = self.db?.collection("usuarios").document(self.idUsuarioLogado ?? "")
         usuarios?.getDocument(completion: { documentSnapshot, error in
-            if error == nil{
+            if error == nil {
                 let dados:Contact = Contact(dicionario: documentSnapshot?.data() ?? [:])
                 self.nomeUsuarioLogado = dados.nome ?? ""
             }
