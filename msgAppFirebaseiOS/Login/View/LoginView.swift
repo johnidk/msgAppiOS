@@ -23,7 +23,7 @@ class LoginScreen: UIView {
     lazy var loginLabel:UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 40)
         label.text = "Login"
         return label
@@ -32,7 +32,7 @@ class LoginScreen: UIView {
     lazy var logoAppImageView:UIImageView = {
       let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "logo")
+        image.image = UIImage(named: "firebase")
         image.tintColor = .green
         image.contentMode = .scaleAspectFit
         return image
@@ -46,7 +46,6 @@ class LoginScreen: UIView {
         tf.borderStyle = .roundedRect
         tf.keyboardType = .emailAddress
         tf.placeholder = "Digite seu Email:"
-        tf.text = "Caio01@outlook.com"
         tf.textColor = .darkGray
         return tf
     }()
@@ -60,7 +59,6 @@ class LoginScreen: UIView {
         tf.keyboardType = .default
         tf.isSecureTextEntry = true
         tf.placeholder = "Digite sua Senha:"
-        tf.text = "caio1234"
         tf.textColor = .darkGray
         return tf
     }()
@@ -70,10 +68,10 @@ class LoginScreen: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Logar", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 7.5
-        button.backgroundColor = UIColor(red: 3/255, green: 58/255, blue: 51/255, alpha: 1.0)
+        button.backgroundColor = UIColor(red: 255/255, green: 202/255, blue: 40/255, alpha: 1.0)
         button.addTarget(self, action: #selector(self.tappedLoginButton), for: .touchUpInside)
        return button
     }()
@@ -83,7 +81,7 @@ class LoginScreen: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Não tem conta? Cadastre-se", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
        return button
     }()
@@ -97,7 +95,7 @@ class LoginScreen: UIView {
     }
     
     private func configBackGround(){
-        self.backgroundColor = UIColor(red: 24/255, green: 117/255, blue: 104/255, alpha: 1.0)
+        self.backgroundColor = UIColor(red: 146/255, green: 220/255, blue: 229/255, alpha: 1.0)
     }
     
     private func configSuperView(){
@@ -138,7 +136,7 @@ class LoginScreen: UIView {
     
     private func configButtonEnable(_ enable:Bool){
         if enable{
-            self.loginButton.setTitleColor(.white, for: .normal)
+            self.loginButton.setTitleColor(.black, for: .normal)
             self.loginButton.isEnabled = true
         }else{
             self.loginButton.setTitleColor(.lightGray, for: .normal)
